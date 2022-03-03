@@ -1,7 +1,9 @@
-FROM centos:8
+ARG TAG=stream
+FROM quay.io/centos/centos:$TAG
 LABEL maintainer="opensource@programator.sk"
 
-RUN curl -sL https://rpm.nodesource.com/setup_10.x | bash -
+RUN yum update -y
+RUN curl -sL https://rpm.nodesource.com/setup_12.x | bash -
 RUN curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN yum install -y git zip unzip bzip2 rsync nodejs yarn gcc-c++ make patch jemalloc-devel
